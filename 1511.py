@@ -21,20 +21,13 @@ def tree_sum(root: Node, lo, hi):
         return 0
 
     sum = 0
-    if root.value < lo:
-        sum += tree_sum(root.right, lo, hi)
-    elif root.value == lo:
+    if lo <= root.value <= hi:
         sum += root.value
+        
+    if root.value > lo:
+        sum += tree_sum(root.left, lo, hi)
+    if root.value < hi:
         sum += tree_sum(root.right, lo, hi)
-    elif lo < root.value < hi:
-        sum += root.value
-        sum += tree_sum(root.left, lo, hi)
-        sum += tree_sum(root.right, lo, hi)
-    elif root.value == hi:
-        sum += root.value
-        sum += tree_sum(root.left, lo, hi)
-    elif root.value > hi:
-        sum += tree_sum(root.left, lo, hi)
 
     return sum
 
